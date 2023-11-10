@@ -1,9 +1,9 @@
 <template>
-    <div>
-      <h2>คำนวณแปลงหน่วยเบเกอรี่</h2>
+    <div class="con">
+      <h2 style="font-weight: bold; color: #9c634f;" >คำนวณแปลงหน่วยเบเกอรี่</h2>
   
       <form action="">
-        <div class="container text-center">
+        <div class="container text-center mt-2">
           <!-- หัวข้อ -->
           <div class="row">
             <div class="col">
@@ -24,7 +24,7 @@
           </div>
   
           <!-- ช่อง -->
-          <div class="row" v-for="(form, index) in forms" :key="index">
+          <div class="row mt-1" v-for="(form, index) in forms" :key="index">
             <div class="col">
               <input class="form-control" v-model="form.ingredient" type="text" placeholder="กรอกส่วนผสม" aria-label="ingredient input">
             </div>
@@ -57,35 +57,31 @@
           </div>
   
           <!-- เพิ่มฟอร์มใหม่เมื่อคลิกปุ่ม + -->
-          <button @click.prevent="addForm">+</button>
+          <button class="button mt-2" @click.prevent="addForm" >เพิ่มรายการ</button>
   
           <!-- ลบฟอร์มเมื่อคลิกปุ่ม - -->
-          <button @click.prevent="removeForm(index)" v-if="forms.length > 1">-</button>
+          <button class="button-delate mt-2"  @click.prevent="removeForm(index)" v-if="forms.length > 1">ลบรายการ</button>
           <br />
         </div>
-        <!-- ปุ่มแสดงค่าในฟอร์ม -->
-        <button @click.prevent="logFormData()">แสดงตารางสูตรเดิม</button>
-        
       </form>
-      <button @click.prevent="logFormData1()">แสดงตารางสูตรที่ต้องการ</button>
     </div>
 
     <!-- สำหรับแสดงสูตร -->
-    <div>
+    <div class="con">
       <div class="mb-3">
-        <h2>คำนวณสูตรเบเกอรี่ต่อชิ้น</h2>
+        <h2 style="font-weight: bold; color: #9c634f;" >คำนวณสูตรเบเกอรี่ต่อชิ้น</h2>
+        <button class="button mt-1" @click.prevent="logFormData()">คำนวณปริมาณสูตร</button>
       </div>
 
       <form action="">
 
-        <div class="container text-center">
-          <div class="row mb-3" style="align-items: center;">
+        <div class="row mb-3" style="align-items: center;">
             <!-- ช่องกรอกจำนวนสูตรเดิม -->
             <div class="col">
             <label for="inputPiece" class="col-form-label">จำนวนชิ้นจากสูตรเดิม</label>
             </div>
             <div class="col">
-              <input type="number" id="inputPiece" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
+              <input type="number" id="inputPiece" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline" required>
             </div>
             <div class="col ">
               <span>ชิ้น</span>
@@ -96,19 +92,23 @@
               <label for="inputPiece1" class="col-form-label">จำนวนชิ้นที่ต้องการ</label>
             </div>
             <div class="col">
-              <input type="number" id="inputPiece1" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
+              <input type="number" id="inputPiece1" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline" required>
             </div>
             <div class="col ">
               <span>ชิ้น</span>
             </div>
 
-          </div>
+        </div>
+
+        <div class="container text-center">
 
 
           <!-- ตารางสูตรเดิม -->
           <div id="formDataDisplay"></div>
         </div>
       </form>
+
+      
 
       <form action="">
         <div class="container text-center">
@@ -120,10 +120,7 @@
         </div>
       </form>
 
-
-
-
-    </div>
+</div>
 
 
 
@@ -139,6 +136,9 @@
         ],
       };
     },
+    mounted() {
+  this.logFormData();
+},
     methods: {
       addForm() {
         // เพิ่มฟอร์มใหม่
@@ -160,24 +160,25 @@
         `).join('');
 
         const formDataDisplay = document.getElementById("formDataDisplay");
-        formDataDisplay.innerHTML = `
-            <div class="mb-3">
-              <h3>แสดงตารางสูตรเดิม</h3>
-            </div>
-          <table class="table" id="formDataTable">
-            <thead>
-              <tr>
+formDataDisplay.innerHTML = `
+    <div class="mb-3">
+        <h3 style="font-weight: bold; color: #c37960;">แสดงตารางสูตรเดิม</h3>
+    </div>
+    <table class="table" id="formDataTable" style="width: 100%; min-width: 900px;">
+        <thead>
+            <tr>
                 <th scope="col">ลำดับ</th>
                 <th scope="col">ส่วนผสม</th>
                 <th scope="col">จำนวน</th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              ${tableBody}
-            </tbody>
-          </table>
-        `;
+            </tr>
+        </thead>
+        <tbody>
+            ${tableBody}
+        </tbody>
+    </table>
+`;
+this.logFormData1();
+
         },
         
         logFormData1() {
@@ -195,14 +196,14 @@
         const formDataDisplay1 = document.getElementById("formDataDisplay1");
           formDataDisplay1.innerHTML = `
           <div class="mb-3">
-              <h3>แสดงตารางสูตรที่ต้องการ</h3>
+              <h3 style="font-weight: bold; color: #c37960;">แสดงตารางสูตรที่ต้องการ</h3>
             </div>
-            <table class="table" id="formDataTable1">
+            <table class="table" id="formDataTable1" style="width: 100%; min-width: 900px;">
               <thead>
                 <tr>
                   <th scope="col">ลำดับ</th>
                   <th scope="col">ส่วนผสม</th>
-                  <th scope="col">หน่วย</th>
+                  <th scope="col">จำนวน</th>
                 </tr>
               </thead>
               <tbody>
@@ -244,10 +245,57 @@
         return `${result.toFixed(2)} `;
       },
     },
+    
   };
   </script>
   
   <style>
-    /* สไตล์ตามต้องการ */
-  </style>
+    .con {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 10px;
+  margin: 10px auto; /* ใช้ margin: auto เพื่อให้อยู่ตรงกลาง */
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  max-width: 1200px;
+  display: flex; /* เพิ่ม Flexbox */
+  flex-direction: column; /* จัดเรียงแนวตั้ง */
+  align-items: center;
   
+}
+
+    .button{
+        background-color: #f0d7a7;
+        font-size: 15px;
+        color: #894e3f;
+        border: 1cm;
+        border-radius: 10px;
+        width: 300px;
+        height: 30px;
+        margin: 10px;
+        
+    }
+
+    .button:hover{
+        background-color: #eee1ba;
+        
+    }
+
+    .button-delate{
+        background-color: #894e3f;
+        font-size: 15px;
+        color: aliceblue;
+        border: 1cm;
+        border-radius: 10px;
+        width: 300px;
+        height: 30px;
+        margin: 10px;
+    }
+
+    .button-delate:hover{
+        background-color: #9c634f;
+        color: aliceblue;
+    }
+</style>

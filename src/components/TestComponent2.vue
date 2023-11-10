@@ -67,6 +67,129 @@
         <button @click.prevent="logFormData()">Log Form Data</button>
       </form>
     </div>
+
+    <!-- สำหรับแสดงสูตร -->
+    <div>
+      <div class="mb-3">
+        <h2>คำนวณสูตรเบเกอรี่ต่อชิ้น</h2>
+      </div>
+
+      <form action="">
+
+        <div class="container text-center">
+          <div class="row mb-3" style="align-items: center;">
+            <!-- ช่องกรอกจำนวนสูตรเดิม -->
+            <div class="col">
+            <label for="inputPiece" class="col-form-label">จำนวนชิ้นจากสูตรเดิม</label>
+            </div>
+            <div class="col">
+              <input type="number" id="inputPiece" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+            <div class="col ">
+              <span>ชิ้น</span>
+            </div>
+
+            <!-- ช่องกรอกจำนวนสูตรใหม่ -->
+            <div class="col">
+              <label for="inputPiece" class="col-form-label">จำนวนชิ้นที่ต้องการ</label>
+            </div>
+            <div class="col">
+              <input type="number" id="inputPiece" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+            <div class="col ">
+              <span>ชิ้น</span>
+            </div>
+
+          </div>
+
+
+          <!-- ตารางสูตรเดิม -->
+          <div class="row mb-3">
+            <div class="mb-3">
+              <h3>แสดงตารางสูตรเดิม</h3>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ลำดับ</th>
+                  <th scope="col">ส่วนผสม</th>
+                  <th scope="col">จำนวน</th>
+                  <th scope="col">หน่วย</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+
+      <form action="">
+        <div class="container text-center">
+          <!-- <div class="row mb-3">
+            <div class="col-auto">
+              <label for="inputPiece" class="col-form-label">จำนวนชิ้นที่ต้องการ</label>
+            </div>
+            <div class="col-auto">
+              <input type="number" id="inputPiece" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+            <div class="col-auto ">
+              <h5>ชิ้น</h5>
+            </div>
+          </div> -->
+
+          <!-- ตารางสูตรใหม่ -->
+          <div class="row ">
+            <div class="mb-3">
+              <h3>แสดงตารางสูตรที่ต้องการ</h3>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ลำดับ</th>
+                  <th scope="col">ส่วนผสม</th>
+                  <th scope="col">จำนวน</th>
+                  <th scope="col">หน่วย</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+
+
   </template>
   
   <script>

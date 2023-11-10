@@ -65,6 +65,7 @@
         </div>
         <!-- ปุ่มแสดงค่าในฟอร์ม -->
         <button @click.prevent="logFormData()">Log Form Data</button>
+        <div id="formDataDisplay"></div>
       </form>
     </div>
   </template>
@@ -89,10 +90,14 @@
         this.forms.splice(index, 1);
       },
       logFormData() {
-        this.forms.forEach((form, index) => {
-          console.log(`Form ${index + 1} Data:`, form);
-        });
-      },
+  let formDataString = "";
+  this.forms.forEach((form, index) => {
+    formDataString += `${index + 1} ${form.ingredient}  ${this.calculateResult(form)}<br>`;
+  });
+
+  // Assuming you have an element with the id "formDataDisplay" to show the data
+  document.getElementById("formDataDisplay").innerHTML = formDataString;
+},
       calculateResult(form) {
         const conversionFactors = {
           '1': 240, // ถ้วยตวง

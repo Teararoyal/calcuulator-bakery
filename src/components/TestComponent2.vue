@@ -1,22 +1,32 @@
 <template>
     <div>
-      <h2>{{ title }}</h2>
-      <p>{{ content }}</p>
+      <h2>{{ greeting }}</h2>
+      <button @click="changeGreeting">Change Greeting</button>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'TestComponent',
+    name: "TestComponent2",
     data() {
       return {
-        title: 'Sample Component 2',
-        content: 'This is a sample Vue.js component. 2',
+        greeting: 'Hello, Vue!',
       };
+    },
+    methods: {
+      // เมทอดที่ใช้เปลี่ยนค่า greeting
+      changeGreeting() {
+        this.greeting = 'Hola, Vue!';
+      },
+      // เมทอดที่รับค่าและแสดงใน console
+      logMessage(message) {
+        console.log(message);
+      },
     },
   };
   </script>
   
-  <style scoped>
-  /* Add component-specific styles here if needed */
+  <style>
+  /* สไตล์ตามต้องการ */
   </style>
+  

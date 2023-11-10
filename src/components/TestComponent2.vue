@@ -64,9 +64,10 @@
           <br />
         </div>
         <!-- ปุ่มแสดงค่าในฟอร์ม -->
-        <button @click.prevent="logFormData()">Log Form Data</button>
-        <div id="formDataDisplay"></div>
+        <button @click.prevent="logFormData()">แสดงตารางสูตรเดิม</button>
+        
       </form>
+      <button @click.prevent="logFormData1()">แสดงตารางสูตรที่ต้องการ</button>
     </div>
 
     <!-- สำหรับแสดงสูตร -->
@@ -92,10 +93,10 @@
 
             <!-- ช่องกรอกจำนวนสูตรใหม่ -->
             <div class="col">
-              <label for="inputPiece" class="col-form-label">จำนวนชิ้นที่ต้องการ</label>
+              <label for="inputPiece1" class="col-form-label">จำนวนชิ้นที่ต้องการ</label>
             </div>
             <div class="col">
-              <input type="number" id="inputPiece" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
+              <input type="number" id="inputPiece1" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
             </div>
             <div class="col ">
               <span>ชิ้น</span>
@@ -105,81 +106,16 @@
 
 
           <!-- ตารางสูตรเดิม -->
-          <div class="row mb-3">
-            <div class="mb-3">
-              <h3>แสดงตารางสูตรเดิม</h3>
-            </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">ลำดับ</th>
-                  <th scope="col">ส่วนผสม</th>
-                  <th scope="col">จำนวน</th>
-                  <th scope="col">หน่วย</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div id="formDataDisplay"></div>
         </div>
       </form>
 
       <form action="">
         <div class="container text-center">
-          <!-- <div class="row mb-3">
-            <div class="col-auto">
-              <label for="inputPiece" class="col-form-label">จำนวนชิ้นที่ต้องการ</label>
-            </div>
-            <div class="col-auto">
-              <input type="number" id="inputPiece" placeholder="กรอกจำนวน" class="form-control" aria-describedby="passwordHelpInline">
-            </div>
-            <div class="col-auto ">
-              <h5>ชิ้น</h5>
-            </div>
-          </div> -->
-
           <!-- ตารางสูตรใหม่ -->
           <div class="row ">
-            <div class="mb-3">
-              <h3>แสดงตารางสูตรที่ต้องการ</h3>
-            </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">ลำดับ</th>
-                  <th scope="col">ส่วนผสม</th>
-                  <th scope="col">จำนวน</th>
-                  <th scope="col">หน่วย</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-              </tbody>
-            </table>
+            
+            <div id="formDataDisplay1"></div>
           </div>
         </div>
       </form>
@@ -212,15 +148,70 @@
         // ลบฟอร์ม
         this.forms.splice(index, 1);
       },
+     
       logFormData() {
-  let formDataString = "";
-  this.forms.forEach((form, index) => {
-    formDataString += `${index + 1} ${form.ingredient}  ${this.calculateResult(form)}<br>`;
-  });
+        const tableBody = this.forms.map((form, index) => `
+          <tr>
+            <th scope="row">${index + 1}</th>
+            <td>${form.ingredient}</td>
+            
+            <td>${this.calculateResult(form)}</td>
+          </tr>
+        `).join('');
 
-  // Assuming you have an element with the id "formDataDisplay" to show the data
-  document.getElementById("formDataDisplay").innerHTML = formDataString;
-},
+        const formDataDisplay = document.getElementById("formDataDisplay");
+        formDataDisplay.innerHTML = `
+            <div class="mb-3">
+              <h3>แสดงตารางสูตรเดิม</h3>
+            </div>
+          <table class="table" id="formDataTable">
+            <thead>
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">ส่วนผสม</th>
+                <th scope="col">จำนวน</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              ${tableBody}
+            </tbody>
+          </table>
+        `;
+        },
+        
+        logFormData1() {
+          const inputPiece = parseFloat(document.getElementById("inputPiece").value);
+          const inputPiece1 = parseFloat(document.getElementById("inputPiece1").value);
+        const tableBody = this.forms.map((form, index) => `
+          <tr>
+            <th scope="row">${index + 1}</th>
+            <td>${form.ingredient}</td>
+            
+            <td>${((this.calculateResult(form) / inputPiece ) * inputPiece1).toFixed(2) }</td>
+          </tr>
+        `).join('');
+        
+        const formDataDisplay1 = document.getElementById("formDataDisplay1");
+          formDataDisplay1.innerHTML = `
+          <div class="mb-3">
+              <h3>แสดงตารางสูตรที่ต้องการ</h3>
+            </div>
+            <table class="table" id="formDataTable1">
+              <thead>
+                <tr>
+                  <th scope="col">ลำดับ</th>
+                  <th scope="col">ส่วนผสม</th>
+                  <th scope="col">หน่วย</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${tableBody}
+              </tbody>
+            </table>
+          `;
+      },
+
       calculateResult(form) {
         const conversionFactors = {
           '1': 240, // ถ้วยตวง
@@ -250,7 +241,7 @@
         const resultgram = (form.amount * conversionFactors[form.fromUnit]);
         const result = resultgram / conversionFactors[form.toUnit];
         // ส่งค่าที่ไม่ใช่ 'grams'
-        return `${result.toFixed(2)} ${unitLabel}`;
+        return `${result.toFixed(2)} `;
       },
     },
   };

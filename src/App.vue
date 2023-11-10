@@ -1,10 +1,12 @@
 <script setup>
  import TestComponent from "./components/TestComponent.vue"
+ import TestComponent2 from "./components/TestComponent2.vue"
 </script>
 
 <template>
   <div>
     <TestComponent />
+    <TestComponent2 />
   </div> 
 </template>
 
